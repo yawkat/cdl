@@ -38,6 +38,7 @@ public class ObjectEditor extends AbstractEditor<Map<String, Object>> {
     public Map<String, Object> mergeDefaultValue(Map<String, Object> configValue) {
         Map<String, Object> def = getDefaultValue();
         if (configValue != null) {
+            def = new HashMap<>(def);
             for (Map.Entry<String, Object> entry : configValue.entrySet()) {
                 Editor editor = entries.get(entry.getKey());
                 if (editor != null) {
