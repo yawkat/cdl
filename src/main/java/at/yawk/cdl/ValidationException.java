@@ -26,7 +26,7 @@ public class ValidationException extends Exception {
             result.append(args[argIndex++]);
             matchStart = matchEnd + 2;
         }
-        result.append(fmt, matchEnd, fmt.length());
+        result.append(fmt, matchStart, fmt.length());
         return result.toString();
     }
 }
