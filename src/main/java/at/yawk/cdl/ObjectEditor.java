@@ -33,7 +33,6 @@ public class ObjectEditor extends AbstractEditor<Map<String, Object>> {
         return defaults;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Map<String, Object> mergeDefaultValue(Map<String, Object> configValue) {
         Map<String, Object> def = getDefaultValue();
@@ -42,10 +41,18 @@ public class ObjectEditor extends AbstractEditor<Map<String, Object>> {
             for (Map.Entry<String, Object> entry : configValue.entrySet()) {
                 Editor editor = entries.get(entry.getKey());
                 if (editor != null) {
-                    def.put(entry.getKey(), editor.mergeDefaultValue(entry.getValue()));
+                    def.put(entry.getKey(), editor.mergeDefaultValueIfCompatible(entry.getValue()));
                 }
             }
         }
         return def;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Map<String, Object> mergeDefaultValueIfCompatible(Object configValue) {
+        return configValue instanceof Map ?
+                mergeDefaultValue((Map<String, Object>) configValue)
+                : getDefaultValue();
     }
 }

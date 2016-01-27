@@ -32,4 +32,11 @@ public class ChoiceEditor extends AbstractEditor<String> {
     public String mergeDefaultValue(String configValue) {
         return configValue == null ? defaultChoice : configValue;
     }
+
+    @Override
+    public String mergeDefaultValueIfCompatible(Object configValue) {
+        return configValue instanceof String ?
+                mergeDefaultValue((String) configValue)
+                : defaultChoice;
+    }
 }

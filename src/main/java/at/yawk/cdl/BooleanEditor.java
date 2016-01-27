@@ -25,4 +25,11 @@ public class BooleanEditor extends AbstractEditor<Boolean> {
     public Boolean mergeDefaultValue(Boolean configValue) {
         return configValue == null ? defaultValue : configValue;
     }
+
+    @Override
+    public Boolean mergeDefaultValueIfCompatible(Object configValue) {
+        return configValue instanceof Boolean ?
+                mergeDefaultValue((Boolean) configValue)
+                : defaultValue;
+    }
 }

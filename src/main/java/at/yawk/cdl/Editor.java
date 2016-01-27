@@ -38,5 +38,7 @@ public interface Editor<T> {
 
     T mergeDefaultValue(T configValue);
 
+    T mergeDefaultValueIfCompatible(Object configValue);
+
     String getDescription();
 }

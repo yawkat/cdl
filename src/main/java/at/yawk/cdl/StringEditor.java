@@ -26,4 +26,11 @@ public class StringEditor extends AbstractEditor<String> {
     public String mergeDefaultValue(String configValue) {
         return configValue == null ? defaultValue : configValue;
     }
+
+    @Override
+    public String mergeDefaultValueIfCompatible(Object configValue) {
+        return configValue instanceof String ?
+                mergeDefaultValue((String) configValue)
+                : defaultValue;
+    }
 }

@@ -30,4 +30,11 @@ public class IntegerEditor extends AbstractEditor<Integer> {
     public Integer mergeDefaultValue(Integer configValue) {
         return configValue == null ? defaultValue : configValue;
     }
+
+    @Override
+    public Integer mergeDefaultValueIfCompatible(Object configValue) {
+        return configValue instanceof Integer ?
+                mergeDefaultValue((Integer) configValue)
+                : defaultValue;
+    }
 }
